@@ -172,3 +172,8 @@ Program prints message to USB CDC (USB serial). So, you can open the serial port
 ```sudo screen /dev/ttyACM0 115200```
 To quit screen session, press CTRL+A and then \.
 
+## Ubuntu on Virtualbox
+There are a few processed that you will need to setup so as to have a well functional 
+ubuntu machine running on windows. 
+
+One think you need to keep in mind is to enable serial ports, usb and copy paste to work with it well
