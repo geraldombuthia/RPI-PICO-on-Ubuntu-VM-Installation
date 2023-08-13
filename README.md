@@ -56,14 +56,17 @@ source /etc/profile.d/pico-sdk.sh
 Create a new directory to store project files and navigate to this directory:
 
 ```mkdir helloworld && cd helloworld```
+
 Create a main.c file:
 
 ```nano main.c```
+
 Once the file is opened, add the following lines of code:
 
 ```helloworld/main.c```
 
-```#include <stdio.h>
+```
+#include <stdio.h>
 #include <pico/stdlib.h>
 
 int main()
@@ -74,15 +77,20 @@ int main()
         printf("Hello world\n");
         sleep_ms(1000);
     }
-}```
+}
+```
+
+
 Create a CMakeLists.txt file:
 
 ```nano CMakeLists.txt```
+
 Add the following content:
 
-helloworld/CMakeLists.txt
+```helloworld/CMakeLists.txt```
 
-```cmake_minimum_required(VERSION 3.13)
+```
+cmake_minimum_required(VERSION 3.13)
 
 include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
 
@@ -100,18 +108,25 @@ pico_add_extra_outputs(${PROJECT_NAME})
 target_link_libraries(${PROJECT_NAME} pico_stdlib)
 
 pico_enable_stdio_usb(${PROJECT_NAME} 1)
-pico_enable_stdio_uart(${PROJECT_NAME} 0)```
+pico_enable_stdio_uart(${PROJECT_NAME} 0)
+```
+
 Create a build directory and navigate to it:
 
 ```mkdir build && cd build```
+
 Prepare CMake build directory by running the following command:
 
 ```cmake ..```
+
 Now run the make command to build program:
 
 ```make -j$(nproc)```
+
 Using the ls command, you can check a list of generated files.
 
-```CMakeCache.txt  cmake_install.cmake  generated  myapp.bin  myapp.elf      myapp.hex  pico-sdk
-CMakeFiles      elf2uf2              Makefile   myapp.dis  myapp.elf.map  myapp.uf2```
+```
+CMakeCache.txt  cmake_install.cmake  generated  myapp.bin  myapp.elf      myapp.hex  pico-sdk
+CMakeFiles      elf2uf2              Makefile   myapp.dis  myapp.elf.map  myapp.uf2
+```
 The myapp.uf2 is a program which can be moved into storage of the Raspberry Pi Pico.
