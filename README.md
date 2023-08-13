@@ -130,3 +130,45 @@ CMakeCache.txt  cmake_install.cmake  generated  myapp.bin  myapp.elf      myapp.
 CMakeFiles      elf2uf2              Makefile   myapp.dis  myapp.elf.map  myapp.uf2
 ```
 The myapp.uf2 is a program which can be moved into storage of the Raspberry Pi Pico.
+
+
+## Upload program
+Hold down the BOOTSEL button and connect the Raspberry Pi Pico to your PC via micro USB cable. Once Pico is connected, release the BOOTSEL button. This button puts Raspberry Pi Pico into USB mass storage device mode.
+
+Finally the USB mass storage device called RPI-RP2
+
+```
+sudo blkid -o list | grep RPI-RP2
+```
+An example of output:
+
+```/dev/sdb1  vfat    RPI-RP2  (not mounted)  0034-04C4```
+
+Create a new directory:
+
+```sudo mkdir /mnt/pico```
+Mount device to /mnt/pico directory:
+
+```sudo mount /dev/sdb1 /mnt/pico```
+Check files in /mnt/pico:
+
+```ls /mnt/pico```
+If you can see the following files, then the USB mass storage device has been mounted correctly:
+
+```INDEX.HTM  INFO_UF2.TXT```
+Copy program into storage device:
+
+```sudo cp myapp.uf2 /mnt/pico```
+Flush memory buffer to the storage device:
+
+```sudo sync```
+Raspberry Pi Pico will disconnect as a USB mass storage device and runs the code.
+
+Note: if you want to upload new code to the Raspberry Pi Pico, disconnect it from power and hold down the BOOTSEL button when connecting Pico to power.
+
+## Test program
+Program prints message to USB CDC (USB serial). So, you can open the serial port to see messages:
+
+```sudo screen /dev/ttyACM0 115200```
+To quit screen session, press CTRL+A and then \.
+
